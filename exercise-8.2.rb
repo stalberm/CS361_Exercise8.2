@@ -102,20 +102,16 @@ class PlayGames
     case @game_number
     when 1
       @player_list.each { |x| players.append(PokerPlayer.new(x, nil)) }
-      poker = Poker.new(players)
-      poker.play()
-      puts poker.get_results()
+      game = Poker.new(players)
     when 2
       @player_list.each { |x, y| players.append(ChessPlayer.new(x, y)) }
-      chess = Chess.new(players)
-      chess.play()
-      puts chess.get_results()
+      game = Chess.new(players)
     when 3
       @player_list.each { |x, y| players.append(GoPlayer.new(x, y)) }
-      go = Go.new(players)
-      go.play()
-      puts go.get_results()
+      game = Go.new(players)
     end
+    game.play()
+    puts game.get_results()
   end
 end
 
