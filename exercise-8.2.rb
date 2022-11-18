@@ -16,6 +16,8 @@ class PokerPlayer < Player
 end
 
 class ChessPlayer < Player
+  attr_reader :color
+
   def initialize(name, color)
     super(name)
     @color = color
@@ -23,7 +25,7 @@ class ChessPlayer < Player
 end
 
 class GoPlayer < Player
-  attr_reader :name, :color
+  attr_reader :color
   
   def initialize(name, color)
     super(name)
@@ -47,36 +49,17 @@ end
 class Poker < Game
   def initialize(players)
     super(players)
-    # @hands = []
-    # players.length().times { |x| @hands.append(nil) }
   end
 
   def play_poker()
     puts "Players in the poker game:"
-    # @players.length().times { |i| puts "#{self.get_player_name(i)}: #{self.get_player_hand(i)}" }
     @players.each { |player| puts "#{player.name}: #{player.hand}" }
     # [pretend there's code here]
   end
 
-  def get_results()
-    return "[pretend these are poker results]"
-  end
-
-  def get_player_name(i)
-    return @players[i]
-  end
-
-  def get_player_hand(i)
-    # return @hands[i]
-    return @players[i]
-  end
 end
 
 class Go < Game
-  # def initialize(players)
-  #   @players = []
-  #   players.each { |x, y| @players.append(GoPlayer.new(x, y)) }
-  # end
   def initialize(players)
     super(players)
   end
@@ -87,9 +70,6 @@ class Go < Game
     # [pretend there's code here]
   end
 
-  def get_score()
-    return "[pretend these are go results]"
-  end
 end
 
 class Chess < Game
@@ -99,17 +79,10 @@ class Chess < Game
 
   def play_game()
     puts "Players in the chess game:"
-    @players.length().times { |x| puts "#{self.get_player_name(x)}: #{@players[x][1]}" }
+    @players.each { |player| puts "#{player.name}: #{player.color}" }
     # [pretend there's code here]
   end
 
-  def get_results()
-    return "[pretend these are chess results]"
-  end
-
-  def get_player_name(i)
-    @players[i][0]
-  end
 end
 
 
@@ -129,15 +102,15 @@ class PlayGames
       poker.play_poker()
       puts poker.get_results()
     when 2
-      
-      chess = Chess.new(@player_list)
+      @player_list.each { |x, y| players.append(ChessPlayer.new(x, y)) }
+      chess = Chess.new(players)
       chess.play_game()
       puts chess.get_results()
     when 3
       @player_list.each { |x, y| players.append(GoPlayer.new(x, y)) }
       go = Go.new(players)
       go.play()
-      puts go.get_score()
+      puts go.get_results()
     end
   end
 end
