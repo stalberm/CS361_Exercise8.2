@@ -4,6 +4,10 @@ class Player
   def initialize(name)
       @name = name
   end
+
+  def to_s
+    name
+  end
 end
 
 class PokerPlayer < Player
@@ -12,6 +16,10 @@ class PokerPlayer < Player
   def initialize(name, hand)
       super(name)
       @hand = hand
+  end
+
+  def to_s
+    "#{name}: #{hand}"
   end
 end
 
@@ -22,6 +30,10 @@ class ChessPlayer < Player
     super(name)
     @color = color
   end
+
+  def to_s
+    "#{name}: #{color}"
+  end
 end
 
 class GoPlayer < Player
@@ -30,6 +42,10 @@ class GoPlayer < Player
   def initialize(name, color)
     super(name)
     @color = color
+  end
+
+  def to_s
+    "#{name}: #{color}"
   end
 end
 
@@ -42,6 +58,7 @@ class Game
 
   def play()
     puts "Players in the #{self.class.name} game:"
+    @players.each { |player| puts "#{player}" }
   end
 
   def get_results()
@@ -51,39 +68,27 @@ end
 
 
 class Poker < Game
-  def initialize(players)
-    super(players)
-  end
-
+  
   def play()
     super
-    @players.each { |player| puts "#{player.name}: #{player.hand}" }
     # [pretend there's code here]
   end
 
 end
 
 class Go < Game
-  def initialize(players)
-    super(players)
-  end
 
   def play()
     super
-    @players.each { |player| puts "#{player.name}: #{player.color}" }
     # [pretend there's code here]
   end
 
 end
 
 class Chess < Game
-  def initialize(players)
-    @players = players
-  end
 
   def play()
     super
-    @players.each { |player| puts "#{player.name}: #{player.color}" }
     # [pretend there's code here]
   end
 
