@@ -40,6 +40,10 @@ class Game
     @players = players
   end
 
+  def play()
+    puts "Players in the #{self.class.name} game:"
+  end
+
   def get_results()
     "[pretend these are #{self.class.name} results]"
   end
@@ -51,8 +55,8 @@ class Poker < Game
     super(players)
   end
 
-  def play_poker()
-    puts "Players in the poker game:"
+  def play()
+    super
     @players.each { |player| puts "#{player.name}: #{player.hand}" }
     # [pretend there's code here]
   end
@@ -65,7 +69,7 @@ class Go < Game
   end
 
   def play()
-    puts "Players in the go game:"
+    super
     @players.each { |player| puts "#{player.name}: #{player.color}" }
     # [pretend there's code here]
   end
@@ -77,8 +81,8 @@ class Chess < Game
     @players = players
   end
 
-  def play_game()
-    puts "Players in the chess game:"
+  def play()
+    super
     @players.each { |player| puts "#{player.name}: #{player.color}" }
     # [pretend there's code here]
   end
@@ -99,12 +103,12 @@ class PlayGames
     when 1
       @player_list.each { |x| players.append(PokerPlayer.new(x, nil)) }
       poker = Poker.new(players)
-      poker.play_poker()
+      poker.play()
       puts poker.get_results()
     when 2
       @player_list.each { |x, y| players.append(ChessPlayer.new(x, y)) }
       chess = Chess.new(players)
-      chess.play_game()
+      chess.play()
       puts chess.get_results()
     when 3
       @player_list.each { |x, y| players.append(GoPlayer.new(x, y)) }
