@@ -90,41 +90,22 @@ class Chess < Game
 end
 
 
-class PlayGames
-
-  def initialize(game_number, player_list)
-    @player_list = player_list
-    @game_number = game_number
-  end
-
-  def play()
-    players = []
-    case @game_number
-    when 1
-      @player_list.each { |x| players.append(PokerPlayer.new(x, nil)) }
-      game = Poker.new(players)
-    when 2
-      @player_list.each { |x, y| players.append(ChessPlayer.new(x, y)) }
-      game = Chess.new(players)
-    when 3
-      @player_list.each { |x, y| players.append(GoPlayer.new(x, y)) }
-      game = Go.new(players)
-    end
-    game.play()
-    puts game.get_results()
-  end
-end
-
-pg = PlayGames.new(1, ["alice", "bob", "chris", "dave"])
-pg.play()
+players = []
+["alice", "bob", "chris", "dave"].each { |x| players.append(PokerPlayer.new(x, nil)) }
+game = Poker.new(players)
+game.play
 
 puts
 
-pg = PlayGames.new(2, [["alice", "white"], ["bob", "black"]])
-pg.play()
+players = []
+[["alice", "white"], ["bob", "black"]].each { |x, y| players.append(GoPlayer.new(x, y)) }
+game = Go.new(players)
+game.play
 
 puts
 
-pg = PlayGames.new(3, [["alice", "white"], ["bob", "black"]])
-pg.play()
+game = Chess.new(players)
+[["alice", "white"], ["bob", "black"]].each { |x, y| players.append(ChessPlayer.new(x, y)) }
+game.play
+
 
